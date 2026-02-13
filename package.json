@@ -33,9 +33,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "peerDependencies": {
-    "google-maps": "^3.56.0"
-  },
   "engines": {
     "node": ">=14.0.0"
   },
