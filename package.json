@@ -1,0 +1,45 @@
+{
+  "name": "@johnson361/advanced-label-marker",
+  "version": "3.1.0",
+  "description": "Modern, drift-free replacement for markerwithlabel. Fixes the google.maps.Marker deprecation (Feb 2024) using AdvancedMarkerElement and synchronized OverlayView.",
+  "main": "index.js",
+  "type": "module",
+  "author": "Nallori Robert Johnson",
+  "license": "MIT",
+  "homepage": "https://www.npmjs.com/package/@johnson361/advanced-label-marker",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnson361/advanced-label-marker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/johnson361/advanced-label-marker/issues"
+  },
+  "keywords": [
+    "markerwithlabel",
+    "google-maps-marker-deprecation",
+    "AdvancedMarkerElement",
+    "google-maps-api",
+    "drift-free-marker",
+    "custom-html-label",
+    "overlay-view",
+    "google-maps-v3",
+    "nallori",
+    "johnson361",
+    "marker-with-label-replacement",
+    "high-performance-maps",
+    "map-label-jitter-fix",
+    "google-maps-2024-migration"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "google-maps": "^3.56.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
