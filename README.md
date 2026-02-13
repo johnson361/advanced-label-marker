@@ -28,5 +28,17 @@ Legacy libraries like `markerwithlabel` rely on events that fire *after* a zoom,
 
 ## 📦 Installation
 
+## Requirements
+
+This library requires the Google Maps JavaScript API.
+
+Load it **before** using this package:
+
+```html
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&v=weekly"
+  defer
+></script>
+
 ```bash
 npm install @johnson361/advanced-label-marker
