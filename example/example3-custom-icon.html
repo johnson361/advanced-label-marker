@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdvancedLabelMarker | Custom Icon Image</title>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "@johnson361/advanced-label-marker": "../../advanced-label-marker/index.js"
+        }
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary: #27ae60;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-100: #f1f5f9;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--slate-900) 0%, var(--slate-800) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .brand span {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-family: monospace;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card p {
+            margin: 0;
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        #map-wrapper {
+            background: white;
+            padding: 0.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        #map {
+            height: 600px;
+            width: 100%;
+            border-radius: 0.5rem;
+        }
+
+        /* Style for the custom icon element */
+        .custom-marker-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            object-fit: cover;
+            transition: transform 0.2s ease;
+        }
+
+        .custom-marker-icon:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="brand">
+            <h1>AdvancedLabelMarker</h1>
+            <span>v3.1.0 • Developed by Nallori Robert Johnson</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="info-card">
+            <p><strong>Custom Icon with InfoWindow:</strong> This example demonstrates replacing the standard map pin
+                with a custom <code>&lt;img&gt;</code> element that triggers an interactive InfoWindow on click.</p>
+        </div>
+
+        <div id="map-wrapper">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=marker&v=weekly"></script>
+
+    <script type="module">
+        import AdvancedLabelMarker from '@johnson361/advanced-label-marker';
+
+        async function init() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: { lat: 49.478, lng: -123.847 },
+                mapId: "DEMO_MAP_ID"
+            });
+
+            // 1. Create the Image Element
+            const iconImg = document.createElement('img');
+            iconImg.src = 'https://maps.google.com/mapfiles/kml/shapes/placemark_circle.png';
+            iconImg.className = 'custom-marker-icon';
+
+            // 2. Initialize with iconHtml
+            const customMarker = new AdvancedLabelMarker({
+                map: map,
+                position: { lat: 49.478, lng: -123.847 },
+                iconHtml: iconImg, // The image becomes the marker
+                draggable: true
+            });
+
+            // Optional InfoWindow on click
+            const infoWindow = new google.maps.InfoWindow({
+                content: '<div style="padding:10px;"><b>Custom Icon</b><br>Styled with CSS</div>',
+                pixelOffset: new google.maps.Size(0, -5)
+            });
+
+            customMarker.addListener('click', () => {
+                infoWindow.open({
+                    anchor: customMarker.marker,
+                    map: map
+                });
+            });
+        }
+
+        if (typeof google !== 'undefined') {
+            init();
+        }
+    </script>
+
+</body>
+
+</html>

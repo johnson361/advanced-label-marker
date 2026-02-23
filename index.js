@@ -31,7 +31,7 @@ class AdvancedLabelMarker extends google.maps.OverlayView {
       map: this.map,
       position: this.position,
       title: options.title || "",
-      content: options.iconHtml || null,   // Only if you want custom HTML icon
+      content: options.iconHtml || document.createElement("div"),   // Only if you want custom HTML icon
       draggable: options.draggable || false, // Use property here
       gmpDraggable: options.draggable || false,
       gmpClickable: true
