@@ -7,7 +7,33 @@
 
 **AdvancedLabelMarker** is a high-performance Google Maps overlay engineered to eliminate the "floating" or "sliding" effect (drift) often seen in custom HTML labels. It is built specifically to address the **February 2024 deprecation of `google.maps.Marker`**.
 
+## ✨ Features
 
+- **Zero Zoom Drift**
+  Pixel-perfect synchronization during zoom and pan.
+
+- **Custom HTML Labels**
+  Full control over label DOM and CSS.
+
+- **Custom HTML Icons**
+  Use `<div>` or `<img>` elements as marker icons.
+
+- **Drag & Drop Support**
+  Built-in synchronization for draggable markers and labels.
+
+- **Event Forwarding**
+  Native-like `click`, `drag`, `dragstart`, and `dragend` events.
+
+- **Clustering Ready**
+  Compatible with MarkerClustererPlus and other clusterers.
+
+- **Dynamic Updates**
+  Change content, styles, or visibility on the fly.
+
+- **Legacy-Friendly API**
+  Modern internals with a familiar API for easy migration.
+
+---
 
 ---
 
