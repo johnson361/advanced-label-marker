@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Custom Image Icons | AdvancedLabelMarker Documentation</title>
+    <meta name="description" content="Tutorial: Replace standard Google Maps pins with custom HTML image elements using AdvancedLabelMarker. Perfect for avatars, logos, and styled markers.">
+    <meta name="keywords" content="Google Maps Custom Icon, AdvancedMarkerElement Image, JavaScript Map Library, Nallori Robert Johnson, Custom Map Pins">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "TechArticle",
+      "headline": "Using Custom Image Icons with AdvancedLabelMarker",
+      "description": "A guide on injecting custom HTML img tags as map markers in Google Maps.",
+      "author": {
+        "@type": "Person",
+        "name": "Nallori Robert Johnson"
+      }
+    }
+    </script>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "@johnson361/advanced-label-marker": "https://cdn.jsdelivr.net/npm/@johnson361/advanced-label-marker/index.js"
+        }
+    }
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="brand">
+            <h1>AdvancedLabelMarker</h1>
+            <span>v3.1.0 • Library Demo</span>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <nav class="nav-card">
+                <div class="nav-header">Library Examples</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="example1-custom-html-marker.html" class="nav-link" >
+                            <span class="icon">🏗️</span> Basic HTML Marker
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example2-info-window-on-html-marker.html" class="nav-link" >
+                            <span class="icon">💬</span> InfoWindow Setup
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example3-custom-icon.html" class="nav-link active">
+                            <span class="icon">🎨</span> Custom Icon Styles
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example4-cluster.html" class="nav-link" >
+                            <span class="icon">🧬</span> Marker Clustering
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <article class="info-card">
+                <h2>Custom Icon Integration</h2>
+                <p>Learn how to replace standard map pins with fully-styled <code>&lt;img&gt;</code> elements.
+                This approach allows for circular avatars or brand logos that respond to CSS hover states.</p>
+            </article>
+
+            <div class="display-area">
+                <div id="map-wrapper">
+                    <div id="map"></div>
+                </div>
+
+                <div class="example-card">
+                    <h3>Implementation Code</h3>
+                    <div class="code-block">const iconImg = document.createElement('img');
+iconImg.src = 'https://images.unsplash.com/photo...';
+iconImg.className = 'custom-marker-icon';
+
+const customMarker = new AdvancedLabelMarker({
+  map: map,
+  position: { lat: 49.478, lng: -123.847 },
+  iconHtml: iconImg,
+  draggable: true
+});
+
+customMarker.addListener('click', () => {
+  infoWindow.open({
+    anchor: customMarker.marker,
+    map: map
+  });
+});</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=marker&v=weekly"></script>
+
+    <script type="module">
+        import AdvancedLabelMarker from '@johnson361/advanced-label-marker';
+
+        async function init() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: { lat: 49.478, lng: -123.847 },
+                mapId: "DEMO_MAP_ID"
+            });
+
+            // 1. Create the Image Element (Avatar or Logo)
+            const iconImg = document.createElement('img');
+            iconImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80';
+            iconImg.className = 'custom-marker-icon';
+            iconImg.alt = "User Profile Marker";
+
+            // 2. Initialize the Library
+            const customMarker = new AdvancedLabelMarker({
+                map: map,
+                position: { lat: 49.478, lng: -123.847 },
+                iconHtml: iconImg, // Inject image into the marker
+                draggable: true
+            });
+
+            const infoWindow = new google.maps.InfoWindow({
+                content: `
+                    <div style="padding:10px; font-family: sans-serif;">
+                        <b style="color:var(--primary)">Custom Icon Component</b><br>
+                        <span style="color:#64748b; font-size:12px;">Responsive Image Element</span>
+                    </div>`,
+                pixelOffset: new google.maps.Size(0, -5)
+            });
+
+            customMarker.addListener('click', () => {
+                infoWindow.open({
+                    anchor: customMarker.marker,
+                    map: map
+                });
+            });
+        }
+
+        if (typeof google !== 'undefined') {
+            init();
+        }
+    </script>
+</body>
+
+</html>

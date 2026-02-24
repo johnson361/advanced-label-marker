@@ -1,0 +1,453 @@
+/* ==========================================
+   COMMON STYLES FOR ADVANCED LABEL MARKER
+   ========================================== */
+
+/* CSS VARIABLES */
+:root {
+    --primary: #27ae60;
+    --slate-900: #0f172a;
+    --slate-800: #1e293b;
+    --slate-700: #475569;
+    --slate-100: #f1f5f9;
+}
+
+/* BASE STYLES */
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    background-color: var(--slate-100);
+    color: var(--slate-900);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ==========================================
+   HEADER STYLES
+   ========================================== */
+header {
+    background: linear-gradient(135deg, var(--slate-900) 0%, var(--slate-800) 100%);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.brand h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.brand span {
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-family: monospace;
+}
+
+/* ==========================================
+   LAYOUT STYLES
+   ========================================== */
+.main-wrapper {
+    display: flex;
+    flex: 1;
+    max-width: 1400px;
+    margin: 2rem auto;
+    width: 100%;
+    gap: 2rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   SIDEBAR & NAVIGATION STYLES
+   ========================================== */
+.sidebar {
+    width: 260px;
+    flex-shrink: 0;
+}
+
+.nav-card {
+    background: white;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    position: sticky;
+    top: 2rem;
+}
+
+.nav-header {
+    background: var(--slate-900);
+    color: white;
+    padding: 1rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    text-decoration: none;
+    color: var(--slate-700);
+    font-size: 0.9rem;
+    transition: 0.2s;
+}
+
+.nav-link:hover {
+    background: #f8fafc;
+    color: var(--primary);
+}
+
+.nav-link.active {
+    background: #f0fdf4;
+    color: var(--primary);
+    font-weight: 600;
+    border-left: 4px solid var(--primary);
+}
+
+.nav-link .icon {
+    margin-right: 12px;
+    font-size: 1.1rem;
+}
+
+/* ==========================================
+   CONTENT AREA STYLES
+   ========================================== */
+.content {
+    flex: 1;
+    min-width: 0;
+}
+
+.display-area {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.example-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================
+   MAP STYLES
+   ========================================== */
+#map-wrapper {
+    background: white;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+#map {
+    height: 600px;
+    width: 100%;
+    border-radius: 0.5rem;
+    background-color: #eee;
+}
+
+/* ==========================================
+   MARKER STYLES
+   ========================================== */
+
+/* Price Tag Marker */
+.price-tag {
+    background: white;
+    color: var(--slate-900);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    border: 2px solid var(--primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+    position: absolute;
+    transform: translate3d(-50%, calc(-100% - 12px), 0);
+    cursor: pointer;
+}
+
+.price-tag::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid var(--primary);
+}
+
+/* Floating Div Tag (for InfoWindow) */
+.floating-div-tag {
+    position: relative;
+    background: #ffffff;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    border: 2px solid var(--primary);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.floating-div-tag::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid var(--primary);
+}
+
+/* Custom Marker Icon */
+.custom-marker-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.custom-marker-icon:hover {
+    transform: scale(1.2) rotate(5deg);
+    border-color: var(--primary);
+}
+
+/* Pin Icon */
+.pin-icon {
+    width: 32px;
+    height: 32px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: transform 0.2s;
+}
+
+.pin-icon:hover {
+    transform: scale(1.2);
+}
+
+/* InfoWindow Container */
+.iw-container {
+    padding: 10px;
+    min-width: 150px;
+}
+
+.iw-title {
+    color: var(--primary);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* ==========================================
+   CODE BLOCK STYLES
+   ========================================== */
+.code-block {
+    background: #1e293b;
+    color: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+/* ==========================================
+   HERO & LANDING PAGE STYLES
+   ========================================== */
+.hero {
+    background: white;
+    padding: 4rem 5%;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin: 0;
+    letter-spacing: -0.05em;
+}
+
+.hero p {
+    color: var(--slate-700);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 1rem auto;
+}
+
+/* ==========================================
+   CONTAINER & GRID LAYOUT
+   ========================================== */
+.container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+}
+
+.example-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ==========================================
+   CARD COMPONENT STYLES
+   ========================================== */
+.card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+    height: 100px;
+    background: var(--slate-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #e2e8f0;
+    color: var(--primary);
+    transition: 0.3s;
+}
+
+.card:hover .card-icon {
+    background: var(--primary);
+    color: white;
+}
+
+.card-icon svg {
+    width: 32px;
+    height: 32px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+}
+
+.card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.card-content h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+    color: var(--slate-900);
+}
+
+.card-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--slate-700);
+    line-height: 1.5;
+}
+
+.card-footer {
+    padding: 1rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--primary);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* ==========================================
+   INSTALL BOX STYLES
+   ========================================== */
+.install-box {
+    background: var(--slate-900);
+    color: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.install-box h3 {
+    margin-top: 0;
+    color: var(--primary);
+}
+
+code {
+    font-family: monospace;
+    background: #1e293b;
+    padding: 6px 10px;
+    border-radius: 4px;
+    color: #e2e8f0;
+}
+
+/* ==========================================
+   FOOTER STYLES
+   ========================================== */
+footer {
+    text-align: center;
+    padding: 4rem 0;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+@media (max-width: 900px) {
+    .main-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .nav-card {
+        position: static;
+    }
+}

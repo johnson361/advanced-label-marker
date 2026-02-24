@@ -1,6 +1,6 @@
 {
   "name": "@johnson361/advanced-label-marker",
-  "version": "3.1.3",
+  "version": "3.1.5",
   "description": "Modern, drift-free replacement for markerwithlabel. Fixes the google.maps.Marker deprecation (Feb 2024) using AdvancedMarkerElement and synchronized OverlayView.",
   "main": "index.js",
   "type": "module",
@@ -28,7 +28,8 @@
     "marker-with-label-replacement",
     "high-performance-maps",
     "map-label-jitter-fix",
-    "google-maps-2024-migration"
+    "google-maps-2024-migration",
+    "google-maps-cluster-custom-marker"
   ],
   "publishConfig": {
     "access": "public"

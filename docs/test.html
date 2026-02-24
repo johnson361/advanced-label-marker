@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdvancedLabelMarker | Official Showcase</title>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "@johnson361/advanced-label-marker": "https://cdn.jsdelivr.net/npm/@johnson361/advanced-label-marker/index.js"
+        }
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary: #27ae60;
+            --primary-soft: rgba(39, 174, 96, 0.1);
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            line-height: 1.5;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--slate-900) 0%, var(--slate-800) 100%);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .brand h1 { margin: 0; font-size: 1.25rem; font-weight: 700; }
+        .brand span { font-size: 0.8rem; color: var(--primary); font-family: monospace; }
+
+        /* Hero */
+        .hero {
+            background: var(--white);
+            padding: 2.5rem 5%;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .hero h2 { font-size: 2.25rem; margin: 0 0 0.5rem; letter-spacing: -0.025em; }
+        .hero p { color: var(--slate-700); max-width: 700px; margin: 0 auto; }
+
+        /* Layout */
+        .main-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+        }
+
+        /* Sidebar Nav */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .example-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .example-card h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #64748b;
+            letter-spacing: 0.05em;
+            margin-top: 0;
+        }
+
+        .nav-item {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            color: var(--slate-700);
+            margin-bottom: 0.25rem;
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover { background: var(--slate-100); }
+        .nav-item.active {
+            background: var(--primary-soft);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Map and Code Display */
+        .display-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        #map-wrapper {
+            background: white;
+            padding: 0.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        #map { height: 500px; width: 100%; border-radius: 0.6rem; }
+
+        .code-block {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        /* --- Custom Marker Styles --- */
+        .price-tag {
+            background: white; color: var(--slate-900); padding: 6px 12px; border-radius: 6px;
+            font-weight: 700; border: 2px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: absolute; transform: translate3d(-50%, calc(-100% - 12px), 0);
+        }
+        .price-tag::after {
+            content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+            border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid var(--primary);
+        }
+
+        .avatar-marker {
+            width: 45px; height: 45px; border-radius: 50%; border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); background-size: cover;
+            transform: translate(-50%, -50%); cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .avatar-marker:hover { transform: translate(-50%, -50%) scale(1.1); }
+
+        @media (max-width: 1024px) {
+            .main-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="brand">
+            <h1>AdvancedLabelMarker</h1>
+            <span>v3.1.0 • Developer: Robert Johnson</span>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h2>Component-Based Map Markers</h2>
+        <p>Harness the power of <code>AdvancedMarkerElement</code> with the ease of HTML/CSS. Clean, performant, and fully customizable.</p>
+    </section>
+
+    <main class="main-container">
+        <aside class="sidebar">
+            <div class="example-card">
+                <h3>Select Example</h3>
+                <nav id="example-menu">
+                    <div class="nav-item active" data-type="realestate">Real Estate Tags</div>
+                    <div class="nav-item" data-type="users">Social Avatars</div>
+                </nav>
+            </div>
+
+            <div class="example-card">
+                <h3>Documentation</h3>
+                <p style="font-size: 0.85rem; color: var(--slate-700);">Use the library to anchor any HTML element to a LatLng coordinate.</p>
+            </div>
+        </aside>
+
+        <section class="display-area">
+            <div id="map-wrapper">
+                <div id="map"></div>
+            </div>
+
+            <div class="example-card">
+                <h3>Implementation Code</h3>
+                <div class="code-block" id="code-display"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=marker&v=weekly"></script>
+
+    <script type="module">
+        import AdvancedLabelMarker from '@johnson361/advanced-label-marker';
+
+        let map;
+        let activeMarkers = [];
+
+        const codeSnippets = {
+            realestate: `const marker = new AdvancedLabelMarker({
+    map: map,
+    position: { lat: 49.478, lng: -123.847 },
+    labelContent: "$425,000",
+    labelClass: "price-tag",
+    draggable: true
+});`,
+            users: `const marker = new AdvancedLabelMarker({
+    map: map,
+    position: { lat: 49.482, lng: -123.850 },
+    labelContent: "", // Content can be empty if using background-image
+    labelClass: "avatar-marker"
+});`
+        };
+
+        async function init() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: { lat: 49.478, lng: -123.847 },
+                mapId: "DEMO_MAP_ID",
+            });
+
+            setupEventListeners();
+            loadExample('realestate');
+        }
+
+        function setupEventListeners() {
+            const menuItems = document.querySelectorAll('.nav-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    // Update UI
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    e.currentTarget.classList.add('active');
+
+                    // Load Example
+                    const type = e.currentTarget.getAttribute('data-type');
+                    loadExample(type);
+                });
+            });
+        }
+
+        function loadExample(type) {
+            // 1. Clear existing markers
+            activeMarkers.forEach(m => {
+                if(m.marker) m.marker.setMap(null);
+            });
+            activeMarkers = [];
+
+            // 2. Update Code Display
+            document.getElementById('code-display').textContent = codeSnippets[type];
+
+            // 3. Logic based on type
+            if (type === 'realestate') {
+                const m = new AdvancedLabelMarker({
+                    map,
+                    position: { lat: 49.478, lng: -123.847 },
+                    labelContent: "$425,000",
+                    labelClass: "price-tag",
+                    draggable: true
+                });
+                activeMarkers.push(m);
+            }
+            else if (type === 'users') {
+                const m = new AdvancedLabelMarker({
+                    map,
+                    position: { lat: 49.482, lng: -123.855 },
+                    labelClass: "avatar-marker"
+                });
+                // Since AdvancedLabelMarker likely creates a div, we can style it
+                if(m.marker && m.marker.content) {
+                    m.marker.content.style.backgroundImage = "url('https://i.pravatar.cc/150?u=robert')";
+                }
+                activeMarkers.push(m);
+            }
+        }
+
+        if (typeof google !== 'undefined') {
+            init();
+        }
+    </script>
+</body>
+</html>

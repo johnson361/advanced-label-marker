@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoWindow Integration | AdvancedLabelMarker Documentation</title>
+    <meta name="description" content="Tutorial: How to anchor Google Maps InfoWindows to custom HTML markers using the AdvancedLabelMarker library. High-performance CSS marker integration.">
+    <meta name="keywords" content="Google Maps, InfoWindow, AdvancedMarkerElement, Custom HTML Marker, JavaScript Library, Nallori Robert Johnson">
+
+    <meta property="og:title" content="AdvancedLabelMarker - InfoWindow Demo">
+    <meta property="og:description" content="Learn how to attach popups to custom-styled HTML markers on Google Maps.">
+    <link rel="canonical" href="https://www.npmjs.com/package/@johnson361/advanced-label-marker">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="importmap">
+    {
+        "imports": {
+            "@johnson361/advanced-label-marker": "https://cdn.jsdelivr.net/npm/@johnson361/advanced-label-marker/index.js"
+        }
+    }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=marker&v=weekly"></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="brand">
+            <h1>AdvancedLabelMarker</h1>
+            <span>v3.1.0 • Technical Demos</span>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <nav class="nav-card" aria-label="Documentation Navigation">
+                <div class="nav-header">Library Examples</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="example1-custom-html-marker.html" class="nav-link" >
+                            <span class="icon">🏗️</span> Basic HTML Marker
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example2-info-window-on-html-marker.html" class="nav-link active">
+                            <span class="icon">💬</span> InfoWindow Setup
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example3-custom-icon.html" class="nav-link" >
+                            <span class="icon">🎨</span> Custom Icon Styles
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example4-cluster.html" class="nav-link" >
+                            <span class="icon">🧬</span> Marker Clustering
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <article class="info-card">
+                <h2>InfoWindow Integration</h2>
+                <p>Learn how to trigger a native <strong>Google Maps InfoWindow</strong> by interacting with a custom CSS-styled label. This ensures your map remains accessible and interactive while maintaining high-end visuals.</p>
+                <p><em>Click the New York label below to test.</em></p>
+            </article>
+
+            <div class="display-area">
+                <div id="map-wrapper">
+                    <div id="map" role="application" aria-label="Interactive Map with InfoWindow"></div>
+                </div>
+
+                <div class="example-card">
+                    <h3>Implementation Code</h3>
+                    <div class="code-block">const labelMarker = new AdvancedLabelMarker({
+  map: map,
+  position: position,
+  labelContent: 'New York City',
+  labelClass: 'floating-div-tag'
+});
+
+const infoWindow = new InfoWindow({
+  content: `<div style="padding:12px;">
+    <h3>New York City</h3>
+    <p>Click to view details</p>
+  </div>`,
+  pixelOffset: new google.maps.Size(0, -45)
+});
+
+labelMarker.addListener("click", () => {
+  infoWindow.open({
+    anchor: labelMarker.marker,
+    map: map
+  });
+});</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import AdvancedLabelMarker from '@johnson361/advanced-label-marker';
+
+        async function initMap() {
+            const { Map, InfoWindow } = await google.maps.importLibrary("maps");
+            await google.maps.importLibrary("marker");
+
+            const position = { lat: 40.7128, lng: -74.0060 };
+
+            const map = new Map(document.getElementById("map"), {
+                zoom: 12,
+                center: position,
+                mapId: "DEMO_MAP_ID",
+                clickableIcons: false
+            });
+
+            const hiddenIcon = document.createElement("div");
+
+            const labelMarker = new AdvancedLabelMarker({
+                map: map,
+                position: position,
+                labelContent: 'New York City',
+                labelClass: 'floating-div-tag',
+                iconHtml: hiddenIcon
+            });
+
+            // Adjusting position for CSS visual alignment
+            const originalOnAdd = labelMarker.onAdd;
+            labelMarker.onAdd = function () {
+                originalOnAdd.apply(this);
+                this.div.style.transform = "translate(-50%, -100%)";
+                this.div.style.marginTop = "-5px";
+            };
+
+            const infoWindow = new InfoWindow({
+                content: `
+                    <div style="padding:12px; font-family: sans-serif;">
+                        <h3 style="margin:0 0 5px; color:#27ae60;">New York City</h3>
+                        <p style="margin:0; font-size:14px; color:#475569;">
+                            Coordinates: ${position.lat}, ${position.lng}
+                        </p>
+                    </div>`,
+                pixelOffset: new google.maps.Size(0, -45)
+            });
+
+            labelMarker.addListener("click", () => {
+                infoWindow.open({
+                    anchor: labelMarker.marker,
+                    map: map,
+                });
+            });
+        }
+
+        window.addEventListener('load', initMap);
+    </script>
+</body>
+
+</html>

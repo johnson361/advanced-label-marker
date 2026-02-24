@@ -1,0 +1,10 @@
+# Allow all major search engines
+User-agent: *
+Allow: /
+
+# Specific instructions for AI crawlers (ChatGPT, etc.)
+User-agent: GPTBot
+Allow: /
+
+User-agent: CCBot
+Allow: /

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Custom HTML Pricing Markers | AdvancedLabelMarker Demo</title>
+    <meta name="description"
+        content="A demonstration of fully customizable HTML elements used as Google Maps markers. Learn how to create dynamic, CSS-styled price tags and overlays.">
+    <meta name="keywords"
+        content="AdvancedMarkerElement, Custom HTML Marker, Google Maps CSS, Real Estate Map, Price Tag Marker">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "SoftwareSourceCode",
+      "name": "AdvancedLabelMarker - Custom HTML Demo",
+      "description": "Implementation of interactive HTML-based markers with price-tag styling.",
+      "codeRepository": "https://github.com/johnson361/advanced-label-marker",
+      "programmingLanguage": "JavaScript"
+    }
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="importmap">
+    {
+        "imports": {
+            "@johnson361/advanced-label-marker": "https://cdn.jsdelivr.net/npm/@johnson361/advanced-label-marker/index.js"
+        }
+    }
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <div class="brand">
+            <h1>AdvancedLabelMarker</h1>
+            <span>v3.1.0 • Feature Demos</span>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <nav class="nav-card">
+                <div class="nav-header">Library Examples</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="example1-custom-html-marker.html" class="nav-link active">
+                            <span class="icon">🏗️</span> Basic HTML Marker
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example2-info-window-on-html-marker.html" class="nav-link">
+                            <span class="icon">💬</span> InfoWindow Setup
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example3-custom-icon.html" class="nav-link">
+                            <span class="icon">🎨</span> Custom Icon Styles
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example4-cluster.html" class="nav-link">
+                            <span class="icon">🧬</span> Marker Clustering
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <article class="info-card">
+                <h2>Custom HTML Markers</h2>
+                <p>Render any HTML element as a marker. This example uses a <strong>CSS Price Tag</strong> style,
+                    perfect for real estate or e-commerce applications.</p>
+            </article>
+
+            <div class="display-area">
+                <div id="map-wrapper">
+                    <div id="map"></div>
+                </div>
+
+                <div class="example-card">
+                    <h3>Implementation Code</h3>
+                    <div class="code-block">const labelMarker = new AdvancedLabelMarker({
+                        map: map,
+                        position: { lat: 49.478, lng: -123.847 },
+                        labelContent: "$425,000",
+                        labelClass: "price-tag",
+                        draggable: true
+                        });
+
+                        labelMarker.addListener('click', () => {
+                        infoWindow.open({
+                        anchor: labelMarker.marker,
+                        map: map
+                        });
+                        });</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=marker&v=weekly"></script>
+
+    <script type="module">
+        import AdvancedLabelMarker from '@johnson361/advanced-label-marker';
+
+        async function init() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: { lat: 49.478, lng: -123.847 },
+                mapId: "DEMO_MAP_ID"
+            });
+
+            var infoWindow = new google.maps.InfoWindow({
+                pixelOffset: new google.maps.Size(0, -10)
+            });
+
+            const labelMarker = new AdvancedLabelMarker({
+                map: map,
+                position: { lat: 49.478, lng: -123.847 },
+                labelContent: "$425,000",
+                labelClass: "price-tag",
+                draggable: true
+            });
+
+            labelMarker.addListener('click', () => {
+                infoWindow.setContent(`
+                    <div class="iw-container">
+                        <h3 class="iw-title">Prime Real Estate</h3>
+                        <div style="color:#64748b; font-size:0.85rem;">Listed by Robert Johnson</div>
+                    </div>
+                `);
+                infoWindow.open({ anchor: labelMarker.marker, map: map });
+            });
+
+            map.addListener('click', () => infoWindow.close());
+        }
+
+        if (typeof google !== 'undefined') {
+            init();
+        }
+    </script>
+</body>
+
+</html>
