@@ -40,6 +40,11 @@
                 <div class="nav-header">Library Examples</div>
                 <ul class="nav-list">
                     <li class="nav-item">
+                        <a href="index.html" class="nav-link" >
+                            <span class="icon">🏗️</span> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="example1-custom-html-marker.html" class="nav-link" >
                             <span class="icon">🏗️</span> Basic HTML Marker
                         </a>
@@ -84,11 +89,11 @@
   labelClass: 'floating-div-tag'
 });
 
-const infoWindow = new InfoWindow({
-  content: `<div style="padding:12px;">
-    <h3>New York City</h3>
-    <p>Click to view details</p>
-  </div>`,
+const infoWindow = new google.maps.InfoWindow({
+  content: `&lt;div style="padding:12px;"&gt;
+    &lt;h3&gt;Property Details&lt;/h3&gt;
+    &lt;p&gt;Click to view listing&lt;/p&gt;
+  &lt;/div&gt;`,
   pixelOffset: new google.maps.Size(0, -45)
 });
 
@@ -100,6 +105,18 @@ labelMarker.addListener("click", () => {
 });</div>
                 </div>
             </div>
+            <section class="info-card" style=" border-left-color: var(--slate-900);">
+                <h3>🚀 Quick Start Guide</h3>
+                <hr>
+                <p><strong>1. Install Library</strong><br>
+                <code>npm install @johnson361/advanced-label-marker</code></p>
+
+                <p><strong>2. View Live Demos</strong><br>
+                Explore more interactive examples at: <a href="https://johnson361.github.io/advanced-label-marker/" style="color: var(--primary); font-weight: 600;">johnson361.github.io/advanced-label-marker/</a></p>
+
+                <p><strong>3. Configure API Key</strong><br>
+                Update the script tag below with your own Google Maps API Key to enable map rendering.</p>
+            </section>
         </main>
     </div>
 

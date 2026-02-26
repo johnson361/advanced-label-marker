@@ -5,22 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Custom Image Icons | AdvancedLabelMarker Documentation</title>
-    <meta name="description" content="Tutorial: Replace standard Google Maps pins with custom HTML image elements using AdvancedLabelMarker. Perfect for avatars, logos, and styled markers.">
-    <meta name="keywords" content="Google Maps Custom Icon, AdvancedMarkerElement Image, JavaScript Map Library, Nallori Robert Johnson, Custom Map Pins">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org/",
-      "@type": "TechArticle",
-      "headline": "Using Custom Image Icons with AdvancedLabelMarker",
-      "description": "A guide on injecting custom HTML img tags as map markers in Google Maps.",
-      "author": {
-        "@type": "Person",
-        "name": "Nallori Robert Johnson"
-      }
-    }
-    </script>
+    <title>Dynamic Image Options | AdvancedLabelMarker Documentation</title>
+    <meta name="description" content="Tutorial: How to use the icon, iconWidth, and iconHeight options in AdvancedLabelMarker to quickly style map markers.">
 
     <script type="importmap">
     {
@@ -31,6 +17,23 @@
     </script>
 
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* CSS for the iconClass option */
+        .avatar-marker {
+            border-radius: 50%;
+            border: 3px solid #27ae60;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            object-fit: cover;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .avatar-marker:hover {
+            transform: scale(1.15) translateY(-5px);
+            border-color: #2ecc71;
+            z-index: 1000;
+        }
+    </style>
 </head>
 
 <body>
@@ -48,12 +51,17 @@
                 <div class="nav-header">Library Examples</div>
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a href="example1-custom-html-marker.html" class="nav-link" >
+                        <a href="index.html" class="nav-link" >
+                            <span class="icon">🏗️</span> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example1-custom-html-marker.html" class="nav-link">
                             <span class="icon">🏗️</span> Basic HTML Marker
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="example2-info-window-on-html-marker.html" class="nav-link" >
+                        <a href="example2-info-window-on-html-marker.html" class="nav-link">
                             <span class="icon">💬</span> InfoWindow Setup
                         </a>
                     </li>
@@ -63,7 +71,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="example4-cluster.html" class="nav-link" >
+                        <a href="example4-cluster.html" class="nav-link">
                             <span class="icon">🧬</span> Marker Clustering
                         </a>
                     </li>
@@ -73,9 +81,8 @@
 
         <main class="content">
             <article class="info-card">
-                <h2>Custom Icon Integration</h2>
-                <p>Learn how to replace standard map pins with fully-styled <code>&lt;img&gt;</code> elements.
-                This approach allows for circular avatars or brand logos that respond to CSS hover states.</p>
+                <h2>Icon Configuration Options</h2>
+                <p>Instead of manually creating image elements, you can pass an <code>icon</code> URL directly into the options. The library will automatically apply the <code>iconWidth</code>, <code>iconHeight</code>, and <code>iconClass</code> you provide.</p>
             </article>
 
             <div class="display-area">
@@ -85,25 +92,33 @@
 
                 <div class="example-card">
                     <h3>Implementation Code</h3>
-                    <div class="code-block">const iconImg = document.createElement('img');
-iconImg.src = 'https://images.unsplash.com/photo...';
-iconImg.className = 'custom-marker-icon';
+                    <div class="code-block">
+const marker = new AdvancedLabelMarker({
+    map: map,
+    position: { lat: 49.478, lng: -123.847 },
 
-const customMarker = new AdvancedLabelMarker({
-  map: map,
-  position: { lat: 49.478, lng: -123.847 },
-  iconHtml: iconImg,
-  draggable: true
-});
-
-customMarker.addListener('click', () => {
-  infoWindow.open({
-    anchor: customMarker.marker,
-    map: map
-  });
+    // Passing options used by setIcon internally:
+    icon: 'https://images.unsplash.com/photo...',
+    iconWidth: '60px',
+    iconHeight: '60px',
+    iconClass: 'avatar-marker',
+    iconAlt: 'User Avatar'
 });</div>
                 </div>
             </div>
+
+            <section class="info-card" style="border-left-color: var(--slate-900);">
+                <h3>🚀 Quick Start Guide</h3>
+                <hr>
+                <p><strong>1. Install Library</strong><br>
+                <code>npm install @johnson361/advanced-label-marker</code></p>
+
+                <p><strong>2. View Live Demos</strong><br>
+                Explore more interactive examples at: <a href="https://johnson361.github.io/advanced-label-marker/" style="color: var(--primary); font-weight: 600;">johnson361.github.io/advanced-label-marker/</a></p>
+
+                <p><strong>3. Configure API Key</strong><br>
+                Update the script tag below with your own Google Maps API Key to enable map rendering.</p>
+            </section>
         </main>
     </div>
 
@@ -113,46 +128,43 @@ customMarker.addListener('click', () => {
         import AdvancedLabelMarker from '@johnson361/advanced-label-marker';
 
         async function init() {
+            if (typeof google === 'undefined') return;
+
             const map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 14,
                 center: { lat: 49.478, lng: -123.847 },
                 mapId: "DEMO_MAP_ID"
             });
 
-            // 1. Create the Image Element (Avatar or Logo)
-            const iconImg = document.createElement('img');
-            iconImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80';
-            iconImg.className = 'custom-marker-icon';
-            iconImg.alt = "User Profile Marker";
-
-            // 2. Initialize the Library
-            const customMarker = new AdvancedLabelMarker({
+            // Utilizing the options that trigger the internal setIcon logic
+            const marker = new AdvancedLabelMarker({
                 map: map,
                 position: { lat: 49.478, lng: -123.847 },
-                iconHtml: iconImg, // Inject image into the marker
-                draggable: true
+                icon: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80',
+                iconWidth: '40px',
+                iconHeight: '40px',
+                iconClass: 'avatar-marker',
+                iconAlt: 'Profile Picture'
             });
 
             const infoWindow = new google.maps.InfoWindow({
                 content: `
                     <div style="padding:10px; font-family: sans-serif;">
-                        <b style="color:var(--primary)">Custom Icon Component</b><br>
-                        <span style="color:#64748b; font-size:12px;">Responsive Image Element</span>
+                        <b style="color:var(--primary)">Auto-Generated Icon</b><br>
+                        <span style="color:#64748b; font-size:12px;">Sized and styled via init options.</span>
                     </div>`,
                 pixelOffset: new google.maps.Size(0, -5)
             });
 
-            customMarker.addListener('click', () => {
+            marker.addListener('click', () => {
                 infoWindow.open({
-                    anchor: customMarker.marker,
+                    anchor: marker.marker,
                     map: map
                 });
             });
         }
 
-        if (typeof google !== 'undefined') {
-            init();
-        }
+        window.addEventListener('load', init);
     </script>
 </body>
 

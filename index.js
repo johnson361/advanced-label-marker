@@ -41,7 +41,8 @@ class AdvancedLabelMarker extends google.maps.OverlayView {
       this.setIcon(options.icon, {
         width: options.iconWidth,   // Optional: allow passing width
         height: options.iconHeight, // Optional: allow passing height
-        className: options.iconClass
+        className: options.iconClass,
+        alt: options.iconAlt
       });
     }
 
