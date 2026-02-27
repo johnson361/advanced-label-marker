@@ -60,8 +60,8 @@ Why read when you can experiment? Our **Live Demo Suite** allows you to see the 
   <tr>
     <td width="50%" align="center">
       <a href="https://johnson361.github.io/advanced-label-marker/example3-custom-icon.html" target="_blank">
-        <b>🏠 Home Icon Example</b><br>
-        <i>Real Estate Themed Pins</i>
+        <b>🏠 Cuasrom Icon Example</b><br>
+        <i>Customized icon on Map</i>
       </a>
     </td>
     <td width="50%" align="center">
