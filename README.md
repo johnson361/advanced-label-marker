@@ -71,6 +71,14 @@ Why read when you can experiment? Our **Live Demo Suite** allows you to see the 
       </a>
     </td>
   </tr>
+  <tr>
+    <td colspan="2" width="100%" align="center" style="background-color: #f8fafc;">
+      <a href="https://johnson361.github.io/advanced-label-marker/example5-event-monitor.html" target="_blank">
+        <b>📡 Live Event Monitor</b><br>
+        <i>Real-time Tracking: Click, Drag, Hover & Log</i>
+      </a>
+    </td>
+  </tr>
 </table>
 
 <br />

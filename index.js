@@ -12,7 +12,7 @@
 
 // Add this check at the very top of your file
 if (typeof window !== 'undefined' && !window.google) {
-    console.warn("@johnson361/advanced-label-marker: Google Maps API not detected. Ensure the API script is loaded before this module.");
+  console.warn("@johnson361/advanced-label-marker: Google Maps API not detected. Ensure the API script is loaded before this module.");
 }
 
 class AdvancedLabelMarker extends google.maps.OverlayView {
@@ -79,10 +79,29 @@ class AdvancedLabelMarker extends google.maps.OverlayView {
     this.div.innerHTML = this.labelContent;
     this.div.style.position = "absolute";
     this.div.style.transform = "translate(-50%, -100%)";
+    this.div.style.cursor = "pointer";
 
-    this.div.addEventListener("click", () => {
-      console.log("Label clicked advanced-label-marker");
-      google.maps.event.trigger(this, "click");
+    // List of events you want to bridge from the HTML Label to the Marker
+    const eventsToBridge = [
+      "click", "dblclick", "mouseover", "mouseout",
+      "mouseup", "mousedown", "contextmenu"
+    ];
+
+    eventsToBridge.forEach(eventName => {
+      this.div.addEventListener(eventName, (e) => {
+        const eventData = {
+          latLng: this.getPosition(),
+          domEvent: e
+        };
+
+        // Trigger on the Overlay instance
+        google.maps.event.trigger(this, eventName, eventData);
+
+        // Trigger on the Marker so google.maps.event.addListener(marker, ...) works
+        if (this.marker) {
+          google.maps.event.trigger(this.marker, eventName, eventData);
+        }
+      });
     });
 
     const panes = this.getPanes();
