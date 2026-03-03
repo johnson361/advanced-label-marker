@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Custom HTML | Event Monitor</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+            background-color: #f1f5f9;
+        }
+
+        #map-wrapper {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        #event-log-container {
+            background: #0f172a;
+            color: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            height: 160px;
+            overflow-y: auto;
+            border: 2px solid #334155;
+            scroll-behavior: smooth;
+        }
+
+        .log-entry {
+            border-bottom: 1px solid #1e293b;
+            padding: 6px 0;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        /* Highlight effect for the newest entry */
+        .log-entry.latest {
+            background: rgba(56, 189, 248, 0.2);
+            color: #38bdf8;
+            padding-left: 8px;
+            border-left: 4px solid #38bdf8;
+            animation: highlight-fade 1.5s ease-out;
+        }
+
+        @keyframes highlight-fade {
+            0% {
+                background: rgba(56, 189, 248, 0.5);
+            }
+
+            100% {
+                background: rgba(56, 189, 248, 0.2);
+            }
+        }
+
+        .log-entry b {
+            color: #38bdf8;
+        }
+
+        .price-tag {
+            background: #2563eb;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-family: sans-serif;
+            cursor: pointer;
+        }
+    </style>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "@johnson361/advanced-label-marker": "https://cdn.jsdelivr.net/npm/@johnson361/advanced-label-marker/index.js"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="brand">
+            <h1>AdvancedLabelMarker</h1>
+            <span>v3.1.0 • Live Event Tracker</span>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <nav class="nav-card">
+                <div class="nav-header">Documentation Hub</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <span class="icon">🏗️</span> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example1-custom-html-marker.html" class="nav-link">
+                            <span class="icon">🏗️</span> Basic HTML Marker
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example2-info-window-on-html-marker.html" class="nav-link">
+                            <span class="icon">💬</span> InfoWindow Setup
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example3-custom-icon.html" class="nav-link">
+                            <span class="icon">🎨</span> Custom Icon Styles
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example4-cluster.html" class="nav-link">
+                            <span class="icon">🧬</span> Marker Clustering
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example5-events.html" class="nav-link active">
+                            <span class="icon">🧬</span> Event Monitor (click, hover, etc.)
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="content">
+            <div class="display-area">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5px;">
+                    <span
+                        style="font-size: 0.8rem; font-weight: bold; color: #64748b; text-transform: uppercase;">Real-time
+                        Event Log</span>
+                    <span style="font-size: 0.7rem; color: #94a3b8;">Newest at bottom</span>
+                </div>
+
+                <div id="event-log-container">
+                    <div class="log-entry"><i>System: Initializing...</i></div>
+                </div>
+
+                <div id="map-wrapper">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=marker&v=weekly"></script>
+
+    <script type="module">
+        import AdvancedLabelMarker from '@johnson361/advanced-label-marker';
+
+        function log(message) {
+            const logContainer = document.getElementById('event-log-container');
+
+            // Remove 'latest' class from previous entries
+            const oldLatest = logContainer.querySelector('.latest');
+            if (oldLatest) oldLatest.classList.remove('latest');
+
+            const entry = document.createElement('div');
+            entry.className = 'log-entry latest'; // Add the latest highlight class
+            entry.innerHTML = `[${new Date().toLocaleTimeString()}] <b>Event:</b> ${message}`;
+
+            logContainer.appendChild(entry);
+
+            // Auto-scroll to the bottom so the latest is always visible
+            logContainer.scrollTop = logContainer.scrollHeight;
+
+            if (logContainer.childNodes.length > 50) {
+                logContainer.removeChild(logContainer.firstChild);
+            }
+        }
+
+        async function init() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: { lat: 49.478, lng: -123.847 },
+                mapId: "DEMO_MAP_ID"
+            });
+
+            const labelMarker = new AdvancedLabelMarker({
+                map: map,
+                position: { lat: 49.478, lng: -123.847 },
+                labelContent: "$425,000",
+                labelClass: "price-tag",
+                draggable: true
+            });
+
+            const marker = labelMarker.marker;
+
+            // Events
+            const events = ["click", "dblclick", "mouseover", "mouseout", "mouseup", "mousedown", "dragstart", "dragend"];
+
+            events.forEach(eventName => {
+                google.maps.event.addListener(marker, eventName, (e) => {
+                    let msg = eventName.toUpperCase();
+                    if (e && e.latLng) msg += ` at ${e.latLng.lat().toFixed(4)}, ${e.latLng.lng().toFixed(4)}`;
+                    log(msg);
+                });
+            });
+
+            log("System Ready. Interact with the blue price tag.");
+        }
+
+        function startApp() {
+            if (typeof google !== 'undefined' && google.maps && google.maps.marker) {
+                init();
+            } else {
+                setTimeout(startApp, 100);
+            }
+        }
+
+        startApp();
+    </script>
+</body>
+
+</html>

@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfoWindow Integration | AdvancedLabelMarker Documentation</title>
-    <meta name="description" content="Tutorial: How to anchor Google Maps InfoWindows to custom HTML markers using the AdvancedLabelMarker library. High-performance CSS marker integration.">
-    <meta name="keywords" content="Google Maps, InfoWindow, AdvancedMarkerElement, Custom HTML Marker, JavaScript Library, Nallori Robert Johnson">
+    <meta name="description"
+        content="Tutorial: How to anchor Google Maps InfoWindows to custom HTML markers using the AdvancedLabelMarker library. High-performance CSS marker integration.">
+    <meta name="keywords"
+        content="Google Maps, InfoWindow, AdvancedMarkerElement, Custom HTML Marker, JavaScript Library, Nallori Robert Johnson">
 
     <meta property="og:title" content="AdvancedLabelMarker - InfoWindow Demo">
     <meta property="og:description" content="Learn how to attach popups to custom-styled HTML markers on Google Maps.">
@@ -40,12 +42,12 @@
                 <div class="nav-header">Library Examples</div>
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a href="index.html" class="nav-link" >
+                        <a href="index.html" class="nav-link">
                             <span class="icon">🏗️</span> Home
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="example1-custom-html-marker.html" class="nav-link" >
+                        <a href="example1-custom-html-marker.html" class="nav-link">
                             <span class="icon">🏗️</span> Basic HTML Marker
                         </a>
                     </li>
@@ -55,13 +57,18 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="example3-custom-icon.html" class="nav-link" >
+                        <a href="example3-custom-icon.html" class="nav-link">
                             <span class="icon">🎨</span> Custom Icon Styles
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="example4-cluster.html" class="nav-link" >
+                        <a href="example4-cluster.html" class="nav-link">
                             <span class="icon">🧬</span> Marker Clustering
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="example5-events.html" class="nav-link ">
+                            <span class="icon">🧬</span> Event Monitor (click, hover, etc.)
                         </a>
                     </li>
                 </ul>
@@ -71,7 +78,9 @@
         <main class="content">
             <article class="info-card">
                 <h2>InfoWindow Integration</h2>
-                <p>Learn how to trigger a native <strong>Google Maps InfoWindow</strong> by interacting with a custom CSS-styled label. This ensures your map remains accessible and interactive while maintaining high-end visuals.</p>
+                <p>Learn how to trigger a native <strong>Google Maps InfoWindow</strong> by interacting with a custom
+                    CSS-styled label. This ensures your map remains accessible and interactive while maintaining
+                    high-end visuals.</p>
                 <p><em>Click the New York label below to test.</em></p>
             </article>
 
@@ -83,39 +92,42 @@
                 <div class="example-card">
                     <h3>Implementation Code</h3>
                     <div class="code-block">const labelMarker = new AdvancedLabelMarker({
-  map: map,
-  position: position,
-  labelContent: 'New York City',
-  labelClass: 'floating-div-tag'
-});
+                        map: map,
+                        position: position,
+                        labelContent: 'New York City',
+                        labelClass: 'floating-div-tag'
+                        });
 
-const infoWindow = new google.maps.InfoWindow({
-  content: `&lt;div style="padding:12px;"&gt;
-    &lt;h3&gt;Property Details&lt;/h3&gt;
-    &lt;p&gt;Click to view listing&lt;/p&gt;
-  &lt;/div&gt;`,
-  pixelOffset: new google.maps.Size(0, -45)
-});
+                        const infoWindow = new google.maps.InfoWindow({
+                        content: `&lt;div style="padding:12px;"&gt;
+                        &lt;h3&gt;Property Details&lt;/h3&gt;
+                        &lt;p&gt;Click to view listing&lt;/p&gt;
+                        &lt;/div&gt;`,
+                        pixelOffset: new google.maps.Size(0, -45)
+                        });
 
-labelMarker.addListener("click", () => {
-  infoWindow.open({
-    anchor: labelMarker.marker,
-    map: map
-  });
-});</div>
+                        labelMarker.addListener("click", () => {
+                        infoWindow.open({
+                        anchor: labelMarker.marker,
+                        map: map
+                        });
+                        });</div>
                 </div>
             </div>
             <section class="info-card" style=" border-left-color: var(--slate-900);">
                 <h3>🚀 Quick Start Guide</h3>
                 <hr>
                 <p><strong>1. Install Library</strong><br>
-                <code>npm install @johnson361/advanced-label-marker</code></p>
+                    <code>npm install @johnson361/advanced-label-marker</code>
+                </p>
 
                 <p><strong>2. View Live Demos</strong><br>
-                Explore more interactive examples at: <a href="https://johnson361.github.io/advanced-label-marker/" style="color: var(--primary); font-weight: 600;">johnson361.github.io/advanced-label-marker/</a></p>
+                    Explore more interactive examples at: <a href="https://johnson361.github.io/advanced-label-marker/"
+                        style="color: var(--primary); font-weight: 600;">johnson361.github.io/advanced-label-marker/</a>
+                </p>
 
                 <p><strong>3. Configure API Key</strong><br>
-                Update the script tag below with your own Google Maps API Key to enable map rendering.</p>
+                    Update the script tag below with your own Google Maps API Key to enable map rendering.</p>
             </section>
         </main>
     </div>

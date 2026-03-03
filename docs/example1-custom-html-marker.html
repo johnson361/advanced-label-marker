@@ -48,7 +48,7 @@
                 <div class="nav-header">Library Examples</div>
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a href="index.html" class="nav-link" >
+                        <a href="index.html" class="nav-link">
                             <span class="icon">🏠</span> Home
                         </a>
                     </li>
@@ -72,6 +72,11 @@
                             <span class="icon">🧬</span> Marker Clustering
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="example5-events.html" class="nav-link ">
+                            <span class="icon">🧬</span> Event Monitor (click, hover, etc.)
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </aside>
@@ -91,20 +96,20 @@
                 <div class="example-card">
                     <h3>Implementation Code</h3>
                     <div class="code-block">
-const labelMarker = new AdvancedLabelMarker({
-  map: map,
-  position: { lat: 49.478, lng: -123.847 },
-  labelContent: "$425,000",
-  labelClass: "price-tag",
-  draggable: true,
-});
+                        const labelMarker = new AdvancedLabelMarker({
+                        map: map,
+                        position: { lat: 49.478, lng: -123.847 },
+                        labelContent: "$425,000",
+                        labelClass: "price-tag",
+                        draggable: true,
+                        });
 
-labelMarker.addListener("click", () => {
-  infoWindow.open({
-    anchor: labelMarker.marker,
-    map: map,
-  });
-});
+                        labelMarker.addListener("click", () => {
+                        infoWindow.open({
+                        anchor: labelMarker.marker,
+                        map: map,
+                        });
+                        });
                     </div>
                 </div>
             </div>
@@ -113,13 +118,16 @@ labelMarker.addListener("click", () => {
                 <h3>🚀 Quick Start Guide</h3>
                 <hr>
                 <p><strong>1. Install Library</strong><br>
-                <code>npm install @johnson361/advanced-label-marker</code></p>
+                    <code>npm install @johnson361/advanced-label-marker</code>
+                </p>
 
                 <p><strong>2. View Live Demos</strong><br>
-                Explore more interactive examples at: <a href="https://johnson361.github.io/advanced-label-marker/" style="color: var(--primary); font-weight: 600;">johnson361.github.io/advanced-label-marker/</a></p>
+                    Explore more interactive examples at: <a href="https://johnson361.github.io/advanced-label-marker/"
+                        style="color: var(--primary); font-weight: 600;">johnson361.github.io/advanced-label-marker/</a>
+                </p>
 
                 <p><strong>3. Configure API Key</strong><br>
-                Update the script tag below with your own Google Maps API Key to enable map rendering.</p>
+                    Update the script tag below with your own Google Maps API Key to enable map rendering.</p>
             </section>
         </main>
     </div>
